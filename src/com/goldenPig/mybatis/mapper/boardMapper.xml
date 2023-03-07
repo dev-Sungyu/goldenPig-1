@@ -107,7 +107,7 @@
 		from tbl_member
 		where member_id = #{memberId}
 	</select>
-		<select id="selectOneByBoardId" parameterType="long" resultType="boardFreeDTO">
+	<select id="selectOneByBoardId" parameterType="long" resultType="boardFreeDTO">
 		select b.board_id, b.member_id, b.board_title, b.board_content, b.board_register_date
 			,b.board_update_date, b.member_nickname, c.favorite_count board_favorite_count
 			, c.reply_count board_reply_count, c.like_count board_like_count, b.board_read_count
@@ -148,15 +148,19 @@
 		select last_insert_id()
 	</select>
 	
-	<select id="selectAllRepliesByBoardId" parameterType="long" resultType="boardFreeReplyDTO">
+	<select id="selectAllRepliesByBoardId" parameterType="long" resultType="boardReplyDTO">
 		select m.member_id, m.member_nickname, m.member_img_path
 			,r.reply_id, r.reply_content, r.reply_register_date, r.reply_update_date
-			, r.member_id, r.board_id
+			, r.board_id
 		from tbl_member m
-		join tbl_board_free_reply r 
+		join tbl_board_reply r 
 		on m.member_id = r.member_id
 		where r.board_id = #{boardId}
 	</select>
-	
+<!-- 	<insert id="answer_content" parameterType="string">
+		insert into goldenpig.tbl_board_saving
+		(board_content)
+		VALUES(#{boardContent});
+	</insert> -->
 </mapper>
 

@@ -144,7 +144,11 @@ public class BoardDAO {
 	
 //	각 게시글 이미지 가져오기
 	public List<BoardDTO> selectAllImgsByBoardId(Long boardId) {
-		return sqlSession.selectList("boardImg.selectAllByBoardId", boardId);
+		return sqlSession.selectList("board.selectAllByBoardId", boardId);
 	}
+//	답글 내용 전달하기
+//	public void insert(String answer_content) {
+//		sqlSession.insert("answer.insert", answer_content);
+//	}
 }
 	

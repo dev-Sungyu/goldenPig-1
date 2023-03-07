@@ -12,8 +12,8 @@ import org.json.JSONObject;
 
 import com.goldenPig.Action;
 import com.goldenPig.Result;
-import com.goldenPig.boardFree.dao.BoardFreeDAO;
-import com.goldenPig.boardFree.domain.BoardFreeDTO;
+import com.goldenPig.board.dao.BoardDAO;
+import com.goldenPig.board.domain.BoardDTO;
 import com.goldenPig.member.dao.MemberDAO;
 import com.goldenPig.member.domain.MemberVO;
 
@@ -43,11 +43,11 @@ public class DetailOkController implements Action {
 	}
 
 	public void detailOk(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, JSONException {
-		BoardFreeDAO boardFreeDAO = new BoardFreeDAO();
+		BoardDAO boardDAO = new BoardDAO();
 		MemberDAO memberDAO = new MemberDAO();
 		Long boardId = Long.parseLong(req.getParameter("boardId"));
 		System.out.println(boardId);
-		BoardFreeDTO dto = boardFreeDAO.selectOneByBoardId(boardId);
+		BoardDTO dto = boardDAO.selectOneByBoardId(boardId);
 		JSONArray replyJsons = new JSONArray();
 		JSONObject dtoJson = new JSONObject(dto);
 		Long memberId = (Long)req.getSession().getAttribute("memberId");
@@ -56,11 +56,9 @@ public class DetailOkController implements Action {
 		MemberVO memberVO = memberDAO.select(memberId);
 		String memberVOJson = new JSONObject(memberVO).toString();
 		
-		boardFreeDAO.selectAllRepliesByBoardId(boardId).stream().map(reply -> new JSONObject(reply)).forEach(replyJsons::put);
+		boardDAO.selectAllRepliesByBoardId(boardId).stream().map(reply -> new JSONObject(reply)).forEach(replyJsons::put);
 
 		
-//		보드 타입
-		req.setAttribute("board", "free");
 //		board의 게시자 및 게시글 정보
 		System.out.println(dtoJson.toString());
 		req.setAttribute("boardInfo", dtoJson.toString());
