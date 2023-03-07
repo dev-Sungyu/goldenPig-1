@@ -147,8 +147,8 @@ public class BoardDAO {
 		return sqlSession.selectList("board.selectAllByBoardId", boardId);
 	}
 //	답글 내용 전달하기
-//	public void insert(String answer_content) {
-//		sqlSession.insert("answer.insert", answer_content);
-//	}
+	public void answerContent(String answerContent) {
+		sqlSession.insert("board.answerContent", answerContent);
+	}
 }
 	

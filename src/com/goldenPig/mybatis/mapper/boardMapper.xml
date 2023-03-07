@@ -107,7 +107,7 @@
 		from tbl_member
 		where member_id = #{memberId}
 	</select>
-	<select id="selectOneByBoardId" parameterType="long" resultType="boardFreeDTO">
+	<select id="selectOneByBoardId" parameterType="long" resultType="boardDTO">
 		select b.board_id, b.member_id, b.board_title, b.board_content, b.board_register_date
 			,b.board_update_date, b.member_nickname, c.favorite_count board_favorite_count
 			, c.reply_count board_reply_count, c.like_count board_like_count, b.board_read_count
@@ -157,10 +157,10 @@
 		on m.member_id = r.member_id
 		where r.board_id = #{boardId}
 	</select>
-<!-- 	<insert id="answer_content" parameterType="string">
+	<insert id="answerContent" parameterType="string">
 		insert into goldenpig.tbl_board_saving
 		(board_content)
 		VALUES(#{boardContent});
-	</insert> -->
+	</insert>
 </mapper>
 

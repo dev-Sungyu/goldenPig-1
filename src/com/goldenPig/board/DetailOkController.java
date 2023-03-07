@@ -48,6 +48,7 @@ public class DetailOkController implements Action {
 		Long boardId = Long.parseLong(req.getParameter("boardId"));
 		System.out.println(boardId);
 		BoardDTO dto = boardDAO.selectOneByBoardId(boardId);
+		System.out.println(dto);
 		JSONArray replyJsons = new JSONArray();
 		JSONObject dtoJson = new JSONObject(dto);
 		Long memberId = (Long)req.getSession().getAttribute("memberId");
