@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>저축게시판 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/board/board_list_free.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/board/board_list.css">
 </head>
 <body>
 <jsp:include page="../header/header.jsp" flush="false" />

@@ -30,8 +30,9 @@ public class AnswerController implements Action {
 	}
 	public Long answerPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		BoardDAO boardDAO = new BoardDAO();
+		String boardIdTemp = req.getParameter("boardId");
 		Long memberId = (Long)req.getSession().getAttribute("memberId");
-		Long boardId = Long.parseLong(req.getParameter("boardId"));
+		Long boardId = Long.parseLong(boardIdTemp == "" ? "0" : boardIdTemp);
 		System.out.println("boardId: " + boardId);
 		
 		memberId = memberId == null ? 1L : memberId;

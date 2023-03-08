@@ -88,7 +88,7 @@ let text = "";
 									<div class="gray-title">답변글</div>
 									<div class="gray-textarea-box">
 										<a name="answer_ok" type="textarea" maxlength="59" placeholder="최대 60자까지 입력할 수 있어요."></a>
-										/*<textarea name="answer_ok" maxlength="59" placeholder="최대 60자까지 입력할 수 있어요."></textarea>*/
+										<textarea name="answer_ok" maxlength="59" placeholder="최대 60자까지 입력할 수 있어요."></textarea>
 										<span class="available-length">0 / 60자</span>
 									</div>
 								</div>

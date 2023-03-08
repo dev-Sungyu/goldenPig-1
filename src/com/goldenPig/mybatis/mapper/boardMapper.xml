@@ -33,37 +33,6 @@
 		limit #{startRow}, #{rowCount}
 	</select>
 	
-	<select id="selectAll" resultType="boardDTO">
-		select f.board_id , f.member_id, f.member_nickname ,  f.board_title, 
-		f.board_update_date, f.board_register_date , f.board_read_count , 
-		ifnull(l.like_count, 0) board_like_count, r.reply_count board_reply_count
-		from
-		(
-			select f.board_id , f.member_id, m.member_nickname ,  f.board_title
-			, f.board_update_date, f.board_register_date , f.board_read_count 
-			from tbl_board_saving f
-			left outer join tbl_member m
-			on f.member_id = m.member_id
-			group by board_id
-		) f
-		left outer join 
-		(
-			select l.board_id, count(l.board_like_id) like_count
-			from tbl_board_saving_like l
-			group by l.board_id 
-		) l
-		on l.board_id = f.board_id 
-		left outer join
-		(
-			select r.board_id, ifnull(count(r.reply_id),0) reply_count
-			from tbl_board_saving_reply r
-			group by r.board_id 
-		) r
-		on r.board_id = l.board_id 
-		group by board_id
-		order by board_id desc 
-		limit #{startRow}, #{rowCount}
-	</select>
 	
 	<select id="getTotal" parameterType="map" resultType="long">
 		select count(board_id) from tbl_board_saving
@@ -114,7 +83,7 @@
 		from (
 			select f.board_id, f.member_id, f.board_title, f.board_content, f.board_register_date, 
 			f.board_update_date, m.member_nickname, f.board_read_count
-			from tbl_board_free f
+			from tbl_board_saving f
 			left outer join tbl_member m
 			on f.member_id = m.member_id
 		) b left outer join (
@@ -153,12 +122,12 @@
 			,r.reply_id, r.reply_content, r.reply_register_date, r.reply_update_date
 			, r.board_id
 		from tbl_member m
-		join tbl_board_reply r 
+		join tbl_board_saving_reply r 
 		on m.member_id = r.member_id
 		where r.board_id = #{boardId}
 	</select>
 	<insert id="answerContent" parameterType="string">
-		insert into goldenpig.tbl_board_saving
+		insert into tbl_board_saving
 		(board_content)
 		VALUES(#{boardContent});
 	</insert>

@@ -6,9 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.goldenPig.board.domain.BoardDTO;
-import com.goldenPig.board.domain.BoardDTO;
 import com.goldenPig.board.domain.BoardReplyDTO;
-import com.goldenPig.boardFree.domain.BoardFreeDTO;
 import com.goldenPig.member.domain.MemberVO;
 import com.goldenPig.mybatis.config.MyBatisConfig;
 
